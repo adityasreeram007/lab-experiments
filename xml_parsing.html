@@ -1,0 +1,65 @@
+<html>
+    <style>
+        table, td {
+          border: 1px solid black;
+        }
+        </style>
+<body>
+
+<p id="demo"></p>
+<p id="demo1"></p>
+<table id="myTable" >
+    <tr>
+      <td>Name </td>
+      <td>Department </td>
+      <td>Year </td>
+    </tr>
+    
+  </table>
+
+
+
+</body>
+</html>
+<script>
+    var text, parser, xmlDoc;
+    
+    text = "<students><student><name>alan</name><dept>CSE</dept><year>2021</year></student><student><name>faxi</name><dept>CSE</dept><year>2021</year></student><student><name>sudhir</name><dept>CSE</dept><year>2021</year></student></students>";//this is the xml document given as text
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(text,"text/xml");
+    var table = document.getElementById("myTable");
+    //console.log(text.match("<student>"));
+    var c=text.split("<");
+    var count=0;
+    for (var i=0;i<c.length;i++)
+    {
+        if(c[i]=="student>")
+        {
+            count+=1;
+        }
+    }
+    
+    for(var i=0;i<count;i++){
+        var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+
+    cell1.innerHTML=xmlDoc.getElementsByTagName("name")[i].childNodes[0].nodeValue;
+    cell2.innerHTML=xmlDoc.getElementsByTagName("dept")[i].childNodes[0].nodeValue;
+    cell3.innerHTML=xmlDoc.getElementsByTagName("year")[i].childNodes[0].nodeValue;
+}
+    </script>
+
+
+
+
+
+
+
+
+<!-- 
+steps to run:
+1.paste this code in a notepad 
+2.save as .html
+3.run in a browser -->
